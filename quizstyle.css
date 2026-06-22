@@ -46,6 +46,50 @@ a {
 .notice b {
   color: #778da9;
 }
+
+/* Previous Button */
+.prevbut-holder {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 10000;
+}
+.qprev {
+
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-color);
+    cursor: pointer;
+    z-index: 10001;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    display: none;
+}
+
+.qprev:hover {
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+.qprev:active {
+    transform: translateY(0);
+}
+
+/* Show previous button on all steps except first, loader, and result */
+#quiz-page.active .qprev {
+    display: block;
+}
+
+/* Hide previous button on specific steps using JavaScript */
+.qprev.hidden {
+    display: none !important;
+}
+
 .sale-banner {
   background: #ed1027;
   padding: 0;
