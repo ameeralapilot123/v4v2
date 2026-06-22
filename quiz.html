@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="quizstyle.css" />
+</head>
+<body>
+    
+<!-- ============================ QUIZ (full-page) ============================ -->
+<div id="quiz-page" class="active" role="region" aria-label="EpiCooler room match quiz">
+  <button class="qback" onclick="qPrev()" aria-label="Back">←</button>
+  <div class="quiz-shell">
+    <div class="quiz-top">
+      <div class="qlogo">EpiCooler Room Match</div>
+      <div class="qtag">Find the right cooling setup for your space</div>
+    </div>
+    <div class="qprogress-track"><div class="qprogress-fill" id="qProgress" style="width: 12.5%;"></div></div>
+    <div class="qprogress-info"><span id="qStepLabel">Step 1 of 8</span><span>30 seconds</span></div>
+
+    <div id="qContainer">
+
+      <!-- step 1 -->
+      <div class="qstep active">
+        <h2 class="qhead">What space are you trying to cool?</h2>
+        <div class="qopt-grid">
+          <button class="qopt" onclick="qSelect('space','Bedroom')"><span class="em">🛏️</span>Bedroom</button>
+          <button class="qopt" onclick="qSelect('space','Home office')"><span class="em">💻</span>Home office</button>
+          <button class="qopt" onclick="qSelect('space','Living room')"><span class="em">🛋️</span>Living room</button>
+          <button class="qopt" onclick="qSelect('space','A whole small apartment')"><span class="em">🏢</span>A whole small apartment</button>
+          <button class="qopt" onclick="qSelect('space','RV, garage or workshop')"><span class="em">🚐</span>RV, garage or workshop</button>
+        </div>
+      </div>
+
+      <!-- step 2 -->
+      <div class="qstep">
+        <h2 class="qhead">How big is the space?</h2>
+        <p class="qdec">A rough guess is fine. This sets the right cooling power.</p>
+        <div class="qform">
+          <label class="qlabel" for="qSize">Select the closest room size</label>
+          <div class="qslider-card">
+            <div class="qtemp-value"><output id="qSizeValue" for="qSize">Under 150 sq ft</output></div>
+            <input class="qrange" id="qSize" type="range" min="0" max="3" step="1" value="0">
+            <div class="qrange-labels"><span>Small</span><span>Large</span></div>
+          </div>
+          <button class="qcontinue" onclick="qSaveSize()">Continue</button>
+        </div>
+      </div>
+
+      <!-- step 3 -->
+      <div class="qstep">
+        <h2 class="qhead">What is your window situation?</h2>
+        <p class="qdec">Most portable ACs need a window and a hose. The EpiCooler does not.</p>
+        <div class="qopt-grid">
+          <button class="qopt" onclick="qSelect('window','No usable window')"><span class="em">🚫</span>No usable window</button>
+          <button class="qopt" onclick="qSelect('window','Landlord won\'t allow installation')"><span class="em">🔑</span>Landlord won't allow installation</button>
+          <button class="qopt" onclick="qSelect('window','Have a window but want zero hassle')"><span class="em">🪟</span>Have a window, but want zero hassle</button>
+          <button class="qopt" onclick="qSelect('window','Don\'t want a hose taking up the window')"><span class="em">🌀</span>Don't want a hose blocking the window</button>
+        </div>
+      </div>
+
+      <!-- step 4: credibility banner -->
+      <div class="qstep">
+        <div class="qbanner">
+          <div class="bh">★ Over 130,000 rooms cooled</div>
+          <div class="bb">The <b>EpiCooler</b> has become one of the most talked-about alternatives to bulky window units. The reason: it cools a room down to <b>60.8°F</b> with <b>no window, no hose and no installation</b>, using an internal heat-exchange system that needs no drain tank. You are almost done. A couple more questions and we will show your personalized cooling projection.</div>
+        </div>
+        <button class="qcontinue" onclick="qNext()">Continue</button>
+      </div>
+
+      <!-- step 5: frustration -->
+      <div class="qstep">
+        <h2 class="qhead">What bothers you most right now?</h2>
+        <div class="qopt-grid">
+          <button class="qopt" onclick="qSelect('pain','Too hot to sleep')"><span class="em">😓</span>It is too hot to sleep</button>
+          <button class="qopt" onclick="qSelect('pain','Electric bill too high')"><span class="em">💸</span>My electric bill is too high</button>
+          <button class="qopt" onclick="qSelect('pain','Current AC too loud')"><span class="em">🔊</span>My current AC or fan is too loud</button>
+          <button class="qopt" onclick="qSelect('pain','Can\'t install anything')"><span class="em">🛠️</span>I can't install anything</button>
+          <button class="qopt" onclick="qSelect('pain','Fans just move hot air')"><span class="em">🌬️</span>Fans just move hot air around</button>
+        </div>
+      </div>
+
+      <!-- step 6: current temp -->
+      <div class="qstep">
+        <h2 class="qhead">How hot does your room get?</h2>
+        <p class="qdec">Your best estimate of the room's worst temperature.</p>
+        <div class="qform">
+          <label class="qlabel" for="qCurrent">Current room temperature</label>
+          <div class="qslider-card">
+            <div class="qtemp-value"><output id="qCurrentValue" for="qCurrent">84</output><span>°F</span></div>
+            <input class="qrange" id="qCurrent" type="range" min="75" max="110" step="1" value="84">
+            <div class="qrange-labels"><span>75°F</span><span>110°F</span></div>
+          </div>
+          <p class="qerr" id="qCurrentErr">Enter a temperature between 75 and 110°F.</p>
+          <button class="qcontinue" onclick="qSaveCurrent()">Continue</button>
+        </div>
+      </div>
+
+      <!-- step 7: target temp -->
+      <div class="qstep">
+        <h2 class="qhead">What feels comfortable to you?</h2>
+        <p class="qdec">The temperature you actually want the room to hold.</p>
+        <div class="qform">
+          <label class="qlabel" for="qTarget">Target temperature</label>
+          <div class="qslider-card">
+            <div class="qtemp-value"><output id="qTargetValue" for="qTarget">72</output><span>°F</span></div>
+            <input class="qrange" id="qTarget" type="range" min="61" max="85" step="1" value="72">
+            <div class="qrange-labels"><span>61°F</span><span>85°F</span></div>
+          </div>
+          <p class="qerr" id="qTargetErr">Enter a comfortable temperature below your current room temperature (61°F or higher).</p>
+          <button class="qcontinue" onclick="qSaveTarget()">Continue</button>
+        </div>
+      </div>
+
+      <!-- step 8: education -->
+      <div class="qstep">
+        <h2 class="qhead">Why most portable ACs fail <span>(and the EpiCooler doesn't)</span></h2>
+        <ul class="qedu">
+          <li>❌ <b>They are really fans.</b> Cheap "coolers" move air without dropping the temperature. 14 of the 17 units we tested barely cooled at all.</li>
+          <li>❌ <b>They need a window and a hose.</b> Useless for renters and a pain to set up.</li>
+          <li>✅ <b>The EpiCooler uses real heat-exchange cooling</b> to reach 60.8°F, with no hose, no window and no installation.</li>
+          <li>✅ <b>Under 45 dB and 2.1 kg,</b> so it is quiet enough to sleep next to and light enough to carry anywhere.</li>
+        </ul>
+        <button class="qcontinue" onclick="qNext()">See My Cooling Projection</button>
+      </div>
+
+      <!-- step 9: urgency / final qualifier -> triggers loader -->
+      <div class="qstep">
+        <h2 class="qhead">How soon do you need relief?</h2>
+        <div class="qopt-grid">
+          <button class="qopt" onclick="qSelect('urgency','Today')"><span class="em">🔥</span>Today, I'm suffering now</button>
+          <button class="qopt" onclick="qSelect('urgency','This week')"><span class="em">📦</span>Within a week</button>
+          <button class="qopt" onclick="qSelect('urgency','Researching')"><span class="em">🔎</span>Just researching for now</button>
+        </div>
+      </div>
+
+      <!-- loader -->
+      <div class="qstep">
+        <div class="qloader">
+          <div class="qspin"></div>
+          <p>Building your cooling projection...</p>
+          <div class="qload-steps">
+            <div><span class="ok">✓</span> Matching your room size to cooling power</div>
+            <div><span class="ok">✓</span> Calculating time to reach your target temperature</div>
+            <div><span class="ok">✓</span> Estimating your energy savings</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div class="qstep" id="qResultStep">
+        <h2 class="qresult-head" id="qResultHead">Based on your answers, the <span>EpiCooler</span> can take your room from 84°F to 72°F in about 9 minutes.</h2>
+
+        <div class="qviewer"><span class="dot"></span><span><b id="qViewerCount">38</b> people are viewing this right now</span></div>
+
+        <div class="qchart-box"><canvas id="qChart"></canvas></div>
+
+        <div class="qsummary">
+          <div class="c before"><div class="lab">Your room now</div><div class="big" id="qBefore">84°F</div><div class="lab">uncomfortable</div></div>
+          <div class="arrow">→</div>
+          <div class="c after"><div class="lab">With EpiCooler</div><div class="big" id="qAfter">72°F</div><div class="lab">comfortable</div></div>
+        </div>
+
+        <div class="qstats">
+          <div class="qstat"><div class="v" id="qStatTime">~9 min</div><div class="l">to target temp</div></div>
+          <div class="qstat"><div class="v">up to 75%</div><div class="l">less energy used</div></div>
+          <div class="qstat"><div class="v">< 45 dB</div><div class="l">quiet enough to sleep</div></div>
+        </div>
+
+        <div class="qmatch" id="qMatch"><b>Your match:</b> a single EpiCooler is the right fit for your space.</div>
+
+        <div class="qprice">
+          <a class="img_link" href="https://ad.mustgraboffers.com/click"><img class="pimg" src="images/hero-image-1.jpg" width="782" height="470" alt="Portable EpiCooler room cooler" onerror="this.style.display='none'" style="display: none;"></a>
+          <div class="ptitle">EpiCooler Portable AC · 30-Day Money-Back Guarantee</div>
+          <div><span class="was">$275.98</span>   <span class="now" id="qPriceNow">$137.99</span></div>
+          <div class="save" id="qSaveLine">You save 50% today</div>
+          <a class="qcta" href="https://ad.mustgraboffers.com/click" target="_blank" rel="nofollow sponsored noopener">Claim My EpiCooler →<small>Free shipping · ships today</small></a>
+          <div class="qguarantee">100% money-back guarantee · secure checkout · discreet packaging</div>
+        </div>
+
+        <div class="qurgency">
+          <div>⏰ Your discount is reserved for: <span class="timer" id="qTimer">14:59</span></div>
+          <div class="stock">Only <span id="qStock">23</span> units left at this price</div>
+        </div>
+
+        <div class="qreviews">
+          <div class="rtitle">What buyers are saying</div>
+          <div class="rstars">★★★★★</div>
+          <div class="rcount">4.8 out of 5, based on 2,847 verified reviews</div>
+          <div id="qComments"></div>
+        </div>
+
+        <a class="qcta" href="https://ad.mustgraboffers.com/click" target="_blank" rel="nofollow sponsored noopener">Cool My Room Today →<small>Only <span id="qStock2">23</span> units left at this price</small></a>
+
+        <div class="qtrust">
+          <p>Your information is secure and never shared.</p>
+          <p>Discreet packaging · 30-day money-back guarantee</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- exit popup -->
+<div class="qexit-overlay" id="qExit">
+  <div class="qexit">
+    <button class="x" onclick="qCloseExit()">×</button>
+    <div class="emoji">🥶</div>
+    <h3>Wait, don't melt out there</h3>
+    <p>Here is an extra reason to cool your room today. Use this code at the EpiCooler store:</p>
+    <div class="code"><div>Your code</div><div class="cv">COOL10</div><div>extra 10% off, applied at checkout</div></div>
+    <a class="qcta" href="https://ad.mustgraboffers.com/click" target="_blank" rel="nofollow sponsored noopener" style="animation:none">Claim My Discount →</a>
+    <button class="exit-popup-dismiss" onclick="qCloseExit()" style="background:none;border:none;color:#8fa0ad;margin-top:10px;cursor:pointer">No thanks, I'll stay hot</button>
+  </div>
+</div>
+
+<script>
+
+/* ============================ MODAL OPEN/CLOSE ============================ */
+const quizPageUrl = 'quiz.html';
+const indexPageUrl = 'index.html';
+
+function openQuizModal(){
+  if (!window.location.pathname.endsWith(quizPageUrl)) {
+    window.location.href = quizPageUrl;
+  }
+}
+function closeQuizModal(){
+  if (!window.location.pathname.endsWith(indexPageUrl)) {
+    window.location.href = indexPageUrl;
+  }
+}
+
+/* ============================ QUIZ STATE ============================ */
+let qStep = 0;
+const qData = {};
+const qSteps = () => document.querySelectorAll('#qContainer .qstep');
+const RESULT_INDEX = 11;   // 0:s1 1:s2 2:s3 3:banner 4:pain 5:cur 6:tgt 7:edu 8:urgency 9:loader 10:(none) -> we map directly
+// Indexes by DOM order: 0 s1,1 s2,2 s3,3 banner,4 pain,5 current,6 target,7 edu,8 urgency,9 loader,10 result
+const LOADER_INDEX = 9;
+const RESULT_DOM_INDEX = 10;
+const qSizeOptions = [
+  { value: 'under150', label: 'Under 150 sq ft' },
+  { value: '150-300', label: '150 to 300 sq ft' },
+  { value: '300-550', label: '300 to 550 sq ft' },
+  { value: '550plus', label: 'Over 550 sq ft' }
+];
+
+function qRender(i){
+  const steps = qSteps();
+  steps.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+  qStep = i;
+  // progress (steps 0..8 are the 8 visible questions/banners before loader)
+  const visibleTotal = 8;
+  let shown = Math.min(i+1, visibleTotal);
+  let pct = i>=LOADER_INDEX ? 100 : (shown/visibleTotal)*100;
+  document.getElementById('qProgress').style.width = pct + '%';
+  document.getElementById('qStepLabel').textContent = i>=LOADER_INDEX ? 'Your result' : ('Step ' + shown + ' of ' + visibleTotal);
+  if(i===RESULT_DOM_INDEX){ qRenderResults(); }
+  window.scrollTo(0,0);
+}
+function qNext(){ if(qStep+1 < qSteps().length) qRender(qStep+1); }
+
+function qSelect(key,val){
+  qData[key]=val;
+  if(key==='urgency'){ qGoLoader(); }
+  else { qNext(); }
+}
+function qSyncSizeSlider(){
+  const el = document.getElementById('qSize');
+  const out = document.getElementById('qSizeValue');
+  if(!el || !out) return;
+  const option = qSizeOptions[parseInt(el.value, 10)] || qSizeOptions[0];
+  qData.size = option.value;
+  out.textContent = option.label;
+}
+function qSaveSize(){
+  qSyncSizeSlider();
+  qNext();
+}
+function qGoLoader(){
+  qRender(LOADER_INDEX);
+  setTimeout(()=>qRender(RESULT_DOM_INDEX), 2200);
+}
+
+function qSyncTempSlider(id){
+  const el = document.getElementById(id);
+  const out = document.getElementById(id + 'Value');
+  if(el && out) out.textContent = el.value;
+}
+function qValidate(id,errId,min,max,mustBeBelow){
+  const el=document.getElementById(id), err=document.getElementById(errId);
+  const n=parseFloat(el.value || '');
+  let ok = !isNaN(n) && n>=min && n<=max;
+  if(ok && mustBeBelow!=null && !(n<qData.current)) ok=false;
+  if(ok){ err.style.display='none'; return n; }
+  err.style.display='block'; el.focus(); return null;
+}
+function qSaveCurrent(){
+  const n=qValidate('qCurrent','qCurrentErr',75,110,null);
+  if(n!=null){
+    qData.current=n;
+    const target = document.getElementById('qTarget');
+    if(target){
+      target.max = Math.max(61, n - 1);
+      if(parseFloat(target.value) >= n) target.value = Math.max(61, n - 12);
+      qSyncTempSlider('qTarget');
+    }
+    qNext();
+  }
+}
+function qSaveTarget(){
+  const n=qValidate('qTarget','qTargetErr',61,109,true);
+  if(n!=null){ qData.target=n; qNext(); }
+}
+
+/* ============================ RESULTS ============================ */
+let qChart;
+function qRenderResults(){
+  const cur = qData.current || 84;
+  const tgt = qData.target || 72;
+  // time to target: TurboCool ~ reaches target in 5-12 min depending on gap and room size
+  const gap = Math.max(1, cur - tgt);
+  let sizeFactor = 1;
+  if(qData.size==='150-300') sizeFactor=1.15;
+  else if(qData.size==='300-550') sizeFactor=1.35;
+  else if(qData.size==='550plus') sizeFactor=1.6;
+  let minutes = Math.round(Math.min(14, Math.max(5, gap*0.7*sizeFactor)));
+
+  // headline + summary
+  const space = (qData.space || 'room').toLowerCase();
+  document.getElementById('qResultHead').innerHTML =
+    'Based on your answers, the <span>EpiCooler</span> can take your ' + space + ' from ' + cur + '°F to ' + tgt + '°F in about ' + minutes + ' minutes.';
+  document.getElementById('qBefore').innerHTML = cur + '°F';
+  document.getElementById('qAfter').innerHTML = tgt + '°F';
+  document.getElementById('qStatTime').textContent = '~' + minutes + ' min';
+
+  // match + price (2-pack for big spaces / whole apartment)
+  const big = qData.size==='550plus' || qData.size==='300-550' || qData.space==='A whole small apartment';
+  if(big){
+    document.getElementById('qMatch').innerHTML = '<b>Your match:</b> for a space this size we recommend the <b>EpiCooler 2-pack</b>, one unit per room, at the best per-unit price.';
+    document.getElementById('qPriceNow').textContent = '$110.99 each';
+    document.getElementById('qSaveLine').textContent = 'You save 60% with the 2-pack';
+  } else {
+    document.getElementById('qMatch').innerHTML = '<b>Your match:</b> a single EpiCooler is the right fit for your space.';
+    document.getElementById('qPriceNow').textContent = '$137.99';
+    document.getElementById('qSaveLine').textContent = 'You save 50% today';
+  }
+
+  qDrawChart(cur, tgt, minutes);
+  qRenderComments();
+}
+
+function qDrawChart(cur, tgt, minutes){
+  const canvas = document.getElementById('qChart');
+  if(!canvas || typeof Chart==='undefined') return;
+  if(qChart) qChart.destroy();
+  if(typeof ChartDataLabels!=='undefined'){ try{ Chart.register(ChartDataLabels); }catch(e){} }
+
+  const totalMin = Math.max(15, minutes+3);
+  const pts = 16;
+  const epi=[], fan=[], labels=[];
+  for(let i=0;i<pts;i++){
+    const t = (i/(pts-1))*totalMin;        // minutes
+    labels.push(t);
+    // EpiCooler: ease down to target by 'minutes', then hold
+    let p = Math.min(1, t/minutes);
+    let eased = p<0.5 ? 2*p*p : -1+(4-2*p)*p;
+    epi.push(+(cur-(cur-tgt)*eased).toFixed(1));
+    // Ordinary fan/cheap cooler: barely drops (2-3 deg) and plateaus
+    let fp = Math.min(1, t/12);
+    fan.push(+(cur-(Math.min(3,(cur-tgt)*0.25))*fp).toFixed(1));
+  }
+  const hitIndex = Math.round((minutes/totalMin)*(pts-1));
+
+  qChart = new Chart(canvas.getContext('2d'),{
+    type:'line',
+    data:{ labels:labels, datasets:[
+      { label:'EpiCooler', data:epi, borderColor:'#0f7d8c', backgroundColor:'rgba(15,125,140,.18)', fill:true, tension:.4,
+        pointRadius:(c)=>c.dataIndex===hitIndex?7:0, pointBackgroundColor:'#ff6b35', pointBorderColor:'#fff', pointBorderWidth:2 },
+      { label:'Ordinary cooler', data:fan, borderColor:'#c0392b', borderDash:[6,5], backgroundColor:'transparent', fill:false, tension:.3, pointRadius:0 }
+    ]},
+    plugins: (typeof ChartDataLabels!=='undefined')?[ChartDataLabels]:[],
+    options:{
+      layout:{ padding:{ top:42, right:18 } },
+      plugins:{
+        legend:{ display:true, position:'bottom', labels:{ boxWidth:14, font:{size:12} } },
+        datalabels:{
+          display:(c)=> c.datasetIndex===0 && c.dataIndex===hitIndex,
+          align:'top', anchor:'center', offset:14, backgroundColor:'#ff6b35', color:'#fff',
+          borderRadius:5, font:{size:13,weight:'bold'}, padding:5,
+          formatter:(v)=> tgt + '°F in ~' + minutes + ' min'
+        },
+        tooltip:{ callbacks:{ title:(it)=> Math.round(it[0].label)+' min', label:(it)=> it.dataset.label+': '+it.raw+'°F' } }
+      },
+      scales:{
+        x:{ title:{display:true,text:'Minutes after switching on',font:{size:11}}, ticks:{ callback:(v,i)=> (i%3===0)?Math.round(labels[i])+'m':'' , font:{size:10} }, grid:{display:false} },
+        y:{ title:{display:true,text:'Room temp (°F)',font:{size:11}}, suggestedMin:Math.max(55,tgt-3), suggestedMax:cur+2, ticks:{font:{size:10}} }
+      },
+      responsive:true, maintainAspectRatio:false
+    }
+  });
+}
+
+/* ============================ SOCIAL PROOF ============================ */
+const qCommentData = [
+  { n:"Jessica M.", v:true, t:"45 min", likes:312, tx:"My landlord won't allow window units so my bedroom was a sauna. This thing got it to 70 in under 10 minutes and I slept like a baby. No hose, no installation, nothing 🙌",
+    replies:[
+      { n:"Laura K.", v:false, t:"30 min", likes:14, tx:"Does it actually cool or is it just a fan? I got burned by one of those before..." },
+      { n:"EpiCooler Team", v:true, t:"22 min", likes:88, tx:"@Laura K. It uses real heat-exchange cooling (not evaporative), which is why it reaches 60.8°F. There is a 30-day money-back guarantee if it is not right for your room ✅" }
+    ]},
+  { n:"Daniel R.", v:true, t:"3 h", likes:201, tx:"Run it next to my desk all day while I work. Quiet enough that I forget it's on, and my office is finally bearable. Wish I'd bought it two summers ago.",
+    replies:[
+      { n:"EpiCooler Team", v:true, t:"2 h", likes:54, tx:"@Daniel R. Love this. Sleep mode is under 45 dB which is why it disappears into the background 🔇" }
+    ]},
+  { n:"Megan T.", v:true, t:"6 h", likes:266, tx:"Carry it from the bedroom to the living room depending on the time of day. One unit, two rooms, weighs nothing. Perfect for a small apartment.",
+    replies:[
+      { n:"Priya S.", v:false, t:"5 h", likes:9, tx:"Does it work in humidity? Houston here 😅" },
+      { n:"EpiCooler Team", v:true, t:"4 h", likes:61, tx:"@Priya S. Yes, unlike evaporative coolers it actually works in humid climates because it does not rely on water evaporation 🌧️" }
+    ]},
+  { n:"Carlos D.", v:true, t:"1 day", likes:188, tx:"Phoenix. 110 outside. Did not expect much from something this small but it holds my bedroom at 72 and my power bill barely moved. Sold." }
+];
+function qRenderComments(){
+  const wrap = document.getElementById('qComments');
+  if(!wrap) return;
+  const render = (c,reply)=>{
+    const vf = c.v ? '<span class="vf">✔ Verified</span>' : '';
+    let html = '<div class="qcomment'+(reply?' reply':'')+'"><div class="qav">'+c.n.charAt(0)+'</div><div style="flex:1">'
+      + '<div class="qbubble"><div class="nm">'+c.n+' '+vf+'</div><div class="tx">'+c.tx+'</div></div>'
+      + '<div class="meta">Like · Reply · '+c.t+(c.likes?'  · 👍 '+c.likes:'')+'</div>';
+    if(c.replies){ c.replies.forEach(r=> html += render(r,true)); }
+    html += '</div></div>';
+    return html;
+  };
+  wrap.innerHTML = qCommentData.map(c=>render(c,false)).join('');
+}
+
+/* ============================ URGENCY MECHANICS ============================ */
+let qStockN = 23;
+function qStartTimer(){
+  let m=14, s=59;
+  setInterval(()=>{
+    if(s>0) s--; else if(m>0){ m--; s=59; } else { m=14; s=59; }
+    const el=document.getElementById('qTimer');
+    if(el) el.textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  },1000);
+}
+function qStartViewer(){
+  setInterval(()=>{
+    const el=document.getElementById('qViewerCount'); if(!el) return;
+    let n=parseInt(el.textContent)||38;
+    n=Math.max(24,Math.min(57,n+(Math.floor(Math.random()*5)-2)));
+    el.textContent=n;
+  },3000);
+}
+function qStartStock(){
+  setInterval(()=>{
+    qStockN=Math.max(4,qStockN-Math.floor(Math.random()*2));
+    ['qStock','qStock2'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=qStockN; });
+  },22000);
+}
+
+let qExitShown = false;
+
+function qSetupExit(){
+  document.addEventListener('mouseout', function(e){
+    if (
+      !e.relatedTarget &&
+      !qExitShown &&
+      document.getElementById('quiz-page').classList.contains('active')
+    ) {
+      document.getElementById('qExit').classList.add('show');
+      qExitShown = true;
+    }
+  });
+}
+
+
+function qCloseExit(){ document.getElementById('qExit').classList.remove('show'); }
+
+/* ============================ INIT ============================ */
+document.addEventListener('DOMContentLoaded', function(){
+  qRender(0);
+  qStartTimer(); qStartViewer(); qStartStock();/* qSetupExit(); */
+  document.querySelectorAll('.sale-banner a, main a.cta, aside a.cta, .sticky a.cta').forEach(function(el){
+    if(!el.closest('#quiz-page')){
+      el.addEventListener('click', function(ev){ ev.preventDefault(); openQuizModal(); });
+    }
+  });
+  ['qCurrent','qTarget'].forEach((id)=>{
+    const el=document.getElementById(id);
+    if(el){
+      qSyncTempSlider(id);
+      el.addEventListener('input', function(){ qSyncTempSlider(id); });
+    }
+  });
+  const sizeEl = document.getElementById('qSize');
+  if(sizeEl){
+    qSyncSizeSlider();
+    sizeEl.addEventListener('input', function(){ qSyncSizeSlider(); });
+  }
+});
+</script>
+
+</body>
+</html>

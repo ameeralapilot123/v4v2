@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Portable Ac</title>
+</head>
+
+<body>
+  <div class="pagecontainer">
+    <div class="section-container">
+      <div class="hero">
+        <div class="leftside-holder">
+          <div class="badge">#1 Portable Cooling Pick</div>
+          <div class="img-container">
+            <img src="imgs/hero.jpg" alt="" />
+          </div>
+          <div class="img-des">
+            Cool One Room With A Low-Power Alternative To Whole-House AC
+          </div>
+          <div class="note">
+            <div class="note-left">
+              <div class="note-icon">🔔</div>
+              <div class="note-text">
+                <strong>Sale page open now.</strong>
+                Current discount appears on the official offer page after
+                availability check.
+              </div>
+            </div>
+            <div class="timer-wrapper">
+              <div class="timer-display" id="discountTimer">
+                <span id="minutes">15</span>
+                <span class="timer-colon">:</span>
+                <span id="seconds">00</span>
+              </div>
+              <div class="timer-label">
+                Time remaining to claim your discount
+              </div>
+            </div>
+            <div class="note-right">
+              <span class="availability-tag">
+                <a href="quiz.html">Check Availability</a>
+              </span>
+            </div>
+          </div>
+          <div class="features-list">
+            <div class="feature-item">Secure</div>
+            <div class="feature-item">Fast Ship</div>
+            <div class="feature-item">Guarantee</div>
+          </div>
+        </div>
+        <div class="rightside-holder">
+          <h1>Stop Overpaying For Cooling. Stay Cool With Less Power</h1>
+          <h3>
+            We reviewed the EpiCooler portable room cooler after seeing it
+            repeatedly sell out during hot weather. It is small, simple to
+            move, and designed for bedrooms, offices, dorms, RVs, and
+            apartments where a traditional AC setup is a hassle.
+          </h3>
+          <div class="img-container">
+            <img src="imgs/heroai.png" alt="EpiCooler Portable Room Cooler" />
+          </div>
+          <div class="author-section">
+            <div class="author-content">
+              <div class="author-image">
+                <img src="imgs/author.png" alt="Astrid Jensen" />
+              </div>
+              <div class="author-text">
+                <span class="author-name">By Astrid Jensen</span>
+                <span class="author-badge">Expert</span>
+                <span>, Home Cooling & Air Comfort Specialist</span>
+                <span class="author-review">
+                  Reviewed for <strong>mustgraboffers.com</strong> · 17
+                  portable cooling products compared
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="normalsection">
+      <!-- ============================ SWIPE-TO-INSTALL DEMO (MINIMALIST) ============================ -->
+      <div class="section-container">
+        <div class="swipe-demo-minimal">
+          <h2 class="swipe-title-minimal">
+            Installation? <span class="highlight">Zero.</span>
+          </h2>
+          <p class="swipe-subtitle-minimal">
+            No tools. No brackets. No hoses. No landlord approval.
+          </p>
+
+          <div class="swipe-container-minimal">
+            <div class="swipe-track" id="swipeTrack">
+              <!-- Stress Side -->
+              <div class="swipe-card swipe-stress-minimal">
+                <div class="swipe-icon-large">😰</div>
+                <div class="swipe-list">
+                  <span>❌ Drilling holes</span>
+                  <span>❌ Heavy brackets</span>
+                  <span>❌ Messy hoses</span>
+                  <span>❌ Landlord approval</span>
+                </div>
+              </div>
+
+              <!-- Divider -->
+              <div class="swipe-divider-minimal" id="swipeDividerMinimal">
+                <div class="swipe-handle-minimal" id="swipeHandleMinimal">
+                  <span>↔</span>
+                </div>
+              </div>
+
+              <!-- Relief Side -->
+              <div class="swipe-card swipe-relief-minimal">
+                <div class="swipe-icon-large">❄️</div>
+                <div class="swipe-steps-minimal">
+                  <div class="step-minimal" id="step1Minimal">
+                    <span class="step-num">1</span>
+                    <span class="step-label">Unbox</span>
+                    <span class="step-check">✓</span>
+                  </div>
+                  <div class="step-minimal" id="step2Minimal">
+                    <span class="step-num">2</span>
+                    <span class="step-label">Plug in</span>
+                    <span class="step-check">✓</span>
+                  </div>
+                </div>
+                <div class="swipe-tag">Ready in 60 seconds</div>
+              </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="swipe-progress-minimal">
+              <div class="swipe-bar-minimal" id="swipeBarMinimal"></div>
+            </div>
+
+            <!-- Popup -->
+            <div class="swipe-popup-minimal" id="swipePopupMinimal">
+              <span id="popupTextMinimal">✨ Just unbox & plug in</span>
+            </div>
+          </div>
+
+          <div class="swipe-cta-minimal">
+            <a href="#" class="cta-minimal"
+              onclick="event.preventDefault(); document.querySelector('.quiz-container').scrollIntoView({behavior:'smooth',block:'start'}); renderQuiz(0); return false;">
+              Skip the installation. Get EpiCooler →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="normalsection">
+      <!-- ============================ SPEC SHEET SHOWDOWN ============================ -->
+      <div class="section-container">
+        <h2 class="spec-title">How It Compares With Other Cooling Options</h2>
+        <p class="spec-subtitle">
+          See why EpiCooler is the clear winner for one-room cooling
+        </p>
+
+        <div class="spec-grid">
+          <!-- EpiCooler Card -->
+          <div class="spec-card spec-winner">
+            <div class="spec-badge winner-badge">🏆 Best Overall</div>
+            <div class="spec-product">
+              <span class="spec-icon">❄️</span>
+              <span class="spec-name">EpiCooler</span>
+            </div>
+
+            <div class="spec-features">
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>Portable</span>
+              </div>
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>No permanent install</span>
+              </div>
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>Good for one room</span>
+              </div>
+              <div class="spec-feature spec-highlight">
+                <span class="spec-check">⚡</span>
+                <span>Most power-efficient pick</span>
+              </div>
+            </div>
+
+            <div class="spec-downside">
+              <span class="spec-urgency">🔴 Limited Availability</span>
+              <span class="spec-stock">Stock moves fast</span>
+            </div>
+
+            <a href="#" class="spec-cta"
+              onclick="event.preventDefault(); document.querySelector('.quiz-container').scrollIntoView({behavior:'smooth',block:'start'}); renderQuiz(0); return false;">
+              Check Availability →
+            </a>
+          </div>
+
+          <!-- Large Portable AC -->
+          <div class="spec-card">
+            <div class="spec-badge">Portable AC</div>
+            <div class="spec-product">
+              <span class="spec-icon">🌀</span>
+              <span class="spec-name">Large Portable AC</span>
+            </div>
+
+            <div class="spec-features">
+              <div class="spec-feature spec-mid">
+                <span class="spec-check">⚠️</span>
+                <span>Somewhat portable</span>
+              </div>
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>Usually no install</span>
+              </div>
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>Good for one room</span>
+              </div>
+              <div class="spec-feature spec-flaw">
+                <span class="spec-check">❌</span>
+                <span>Often power-hungry</span>
+              </div>
+            </div>
+
+            <div class="spec-downside spec-flaw-box">
+              <span class="spec-flaw-icon">⚠️</span>
+              <span>Bulky, loud, expensive</span>
+            </div>
+          </div>
+
+          <!-- Traditional Installed AC -->
+          <div class="spec-card">
+            <div class="spec-badge">Installed AC</div>
+            <div class="spec-product">
+              <span class="spec-icon">🏠</span>
+              <span class="spec-name">Traditional Installed AC</span>
+            </div>
+
+            <div class="spec-features">
+              <div class="spec-feature spec-flaw">
+                <span class="spec-check">❌</span>
+                <span>Not portable</span>
+              </div>
+              <div class="spec-feature spec-flaw">
+                <span class="spec-check">❌</span>
+                <span>Requires installation</span>
+              </div>
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>Good for one room</span>
+              </div>
+              <div class="spec-feature spec-mid">
+                <span class="spec-check">⚠️</span>
+                <span>Can cool unused rooms</span>
+              </div>
+            </div>
+
+            <div class="spec-downside spec-flaw-box">
+              <span class="spec-flaw-icon">⚠️</span>
+              <span>Heavy, permanent, costly install</span>
+            </div>
+          </div>
+
+          <!-- Standard Fan -->
+          <div class="spec-card">
+            <div class="spec-badge">Standard Fan</div>
+            <div class="spec-product">
+              <span class="spec-icon">🌬️</span>
+              <span class="spec-name">Standard Fan</span>
+            </div>
+
+            <div class="spec-features">
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>Portable</span>
+              </div>
+              <div class="spec-feature">
+                <span class="spec-check">✅</span>
+                <span>No install needed</span>
+              </div>
+              <div class="spec-feature spec-mid">
+                <span class="spec-check">⚠️</span>
+                <span>Limited cooling</span>
+              </div>
+              <div class="spec-feature spec-flaw">
+                <span class="spec-check">❌</span>
+                <span>No active cooling feel</span>
+              </div>
+            </div>
+
+            <div class="spec-downside spec-flaw-box">
+              <span class="spec-flaw-icon">⚠️</span>
+              <span>Just moves warm air around</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="articlecontainer">
+      <div class="section-container">
+        <h2 class="article-title">Why Shoppers Are Looking For This Type Of Portable AC</h2>
+        <div class="article-content">
+          <div class="article-image-holder">
+            <img class="article-img" src="imgs/EpiCooler.jpg" alt="EpiCooler Portable Room Cooler" />
+          </div>
+          <div class="article-text">
+            <p>
+              Summer cooling gets expensive fast when you cool the whole
+              home just to make one bedroom comfortable. Traditional units
+              can be heavy, loud, and hard to move. Many renters also cannot
+              drill, mount, or install anything permanent.
+            </p>
+            <p>
+              The energy-saving appeal is simple: EpiCooler is made for spot
+              cooling. Instead of forcing a large AC system to work for
+              rooms you are not using, shoppers can focus cooling on the
+              bedroom, office, or small space where they actually need
+              relief.
+            </p>
+            <p>
+              That is where the EpiCooler offer fits. It is positioned as a
+              compact, room-by-room cooling product. You put it where you
+              need relief, move it when you switch rooms, and avoid turning
+              a small cooling problem into a full installation project.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="normalsection">
+      <!-- ============================ EPICOOLER CTA BLOCK ============================ -->
+      <div class="section-container">
+        <div class="cta-block">
+
+          <div class="cta-block-inner">
+            <!-- Left Column -->
+            <div class="cta-left">
+              <div class="cta-rating">
+                <span class="cta-stars">⭐⭐⭐⭐⭐</span>
+                <span class="cta-score">4.8/5</span>
+                <span class="cta-count">(1,200+ ratings)</span>
+              </div>
+
+              <div class="cta-review">
+                <span class="cta-quote">"</span>
+                Best portable cooler I've owned
+                <span class="cta-quote">"</span>
+                <span class="cta-author">Buyer Rating</span>
+              </div>
+
+              <div class="cta-features">
+                <span class="cta-feature">✅ Official store</span>
+                <span class="cta-feature">✅ Secure checkout</span>
+                <span class="cta-feature">✅ 30-day guarantee</span>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="cta-divider"></div>
+
+            <!-- Right Column -->
+            <div class="cta-right">
+              <div class="cta-badges">
+                <span class="cta-badge hot">🔥 Promo active today</span>
+                <span class="cta-badge stock">⏳ Inventory moving fast</span>
+              </div>
+
+              <div class="cta-product">
+                <span class="cta-product-icon">❄️</span>
+                <span class="cta-product-name">EpiCooler Portable Room Cooler</span>
+              </div>
+
+              <a href="#" class="cta-button"
+                onclick="event.preventDefault(); document.querySelector('.quiz-container').scrollIntoView({behavior:'smooth',block:'start'}); renderQuiz(0); return false;">
+                Check Availability →
+              </a>
+
+              <div class="cta-footer">
+                <span>Free shipping availability</span>
+                <span class="cta-dot">·</span>
+                <span>30-day money-back guarantee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="normalsection">
+      <!-- ============================ WHAT WE LIKE ABOUT EPICOOLER ============================ -->
+      <div class="section-container">
+        <h2 class="like-title">What We Like About EpiCooler</h2>
+
+        <!-- Ratings with Bars - 2 Column Grid -->
+        <div class="like-ratings-grid">
+          <div class="like-rating-bar">
+            <div class="like-rating-bar-header">
+              <span class="like-rating-bar-icon">🧳</span>
+              <span class="like-rating-bar-label">Portability</span>
+              <span class="like-rating-bar-score">9.7</span>
+            </div>
+            <div class="like-bar-track">
+              <div class="like-bar-fill" style="width: 97%">
+                <span class="like-bar-value">97%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="like-rating-bar">
+            <div class="like-rating-bar-header">
+              <span class="like-rating-bar-icon">🔧</span>
+              <span class="like-rating-bar-label">Simple Setup</span>
+              <span class="like-rating-bar-score">9.8</span>
+            </div>
+            <div class="like-bar-track">
+              <div class="like-bar-fill" style="width: 98%">
+                <span class="like-bar-value">98%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="like-rating-bar">
+            <div class="like-rating-bar-header">
+              <span class="like-rating-bar-icon">❄️</span>
+              <span class="like-rating-bar-label">Spot-Cooling Efficiency</span>
+              <span class="like-rating-bar-score">9.5</span>
+            </div>
+            <div class="like-bar-track">
+              <div class="like-bar-fill" style="width: 95%">
+                <span class="like-bar-value">95%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="like-rating-bar">
+            <div class="like-rating-bar-header">
+              <span class="like-rating-bar-icon">💰</span>
+              <span class="like-rating-bar-label">Offer Value</span>
+              <span class="like-rating-bar-score">9.6</span>
+            </div>
+            <div class="like-bar-track">
+              <div class="like-bar-fill" style="width: 96%">
+                <span class="like-bar-value">96%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial -->
+        <div class="like-testimonial">
+          <span class="like-testimonial-text">
+            "Cooler room tonight — no tools, no landlord, no hassle."
+          </span>
+        </div>
+
+        <!-- Pros & Cons -->
+        <div class="like-proscons">
+          <!-- Pros -->
+          <div class="like-pros">
+            <h3 class="like-pros-title">✅ PROS</h3>
+            <ul class="like-list">
+              <li>Portable & lightweight — move it room to room</li>
+              <li>No installation needed — zero tools required</li>
+              <li>Saves energy vs. whole-home AC</li>
+              <li>Renter & dorm friendly — no landlord approval</li>
+              <li>Whisper-quiet — under 45 dB</li>
+              <li>Discount active now — today only</li>
+            </ul>
+          </div>
+
+          <!-- Cons -->
+          <div class="like-cons">
+            <h3 class="like-cons-title">❌ CONS</h3>
+            <ul class="like-list">
+              <li>Often out of stock during hot weather</li>
+              <li>Best deal available on official site only</li>
+              <li>Large homes may need multiple units</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p class="like-description">
+          The biggest selling point is convenience. EpiCooler is designed for
+          the buyer who wants a cooler room tonight without a complicated
+          setup. That makes it a strong fit for people who are tired of fans
+          that just move warm air around but do not want to commit to a large
+          AC purchase.
+        </p>
+
+        <!-- CTA -->
+        <div class="like-cta">
+          <a href="#" class="like-cta-button"
+            onclick="event.preventDefault(); document.querySelector('.quiz-container').scrollIntoView({behavior:'smooth',block:'start'}); renderQuiz(0); return false;">
+            👉 Check Availability
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="normalsection">
+      <!-- ============================ BUYER COMMENTS ============================ -->
+      <div class="section-container">
+        <div class="comments-wrapper">
+          <h2 class="comments-title">💬 What Buyers Are Saying</h2>
+
+          <div class="comments-grid">
+            <!-- Comment 1 -->
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar" style="
+                      background: linear-gradient(135deg, #415a77, #1b263b);
+                    ">
+                  <span>J</span>
+                </div>
+                <div class="comment-meta">
+                  <div class="comment-name">Jessica M.</div>
+                  <div class="comment-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <p class="comment-text">
+                "My bedroom was unbearable. I wanted something I could move
+                around without installing anything. This did exactly what I
+                needed."
+              </p>
+              <div class="comment-footer">
+                <span class="comment-verified">✅ Verified buyer</span>
+                <span class="comment-time">· 2 hours ago</span>
+              </div>
+            </div>
+
+            <!-- Comment 2 -->
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar" style="
+                      background: linear-gradient(135deg, #778da9, #415a77);
+                    ">
+                  <span>D</span>
+                </div>
+                <div class="comment-meta">
+                  <div class="comment-name">Daniel R.</div>
+                  <div class="comment-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <p class="comment-text">
+                "I use it in my home office during the day and move it beside
+                the bed at night. Much easier than buying another big unit."
+              </p>
+              <div class="comment-footer">
+                <span class="comment-verified">✅ Verified buyer</span>
+                <span class="comment-time">· 5 hours ago</span>
+              </div>
+            </div>
+
+            <!-- Comment 3 -->
+            <div class="comment-card comment-featured">
+              <div class="comment-header">
+                <div class="comment-avatar" style="
+                      background: linear-gradient(135deg, #0d1b2a, #415a77);
+                    ">
+                  <span>M</span>
+                </div>
+                <div class="comment-meta">
+                  <div class="comment-name">Megan T.</div>
+                  <div class="comment-stars">⭐⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <p class="comment-text">
+                "Good for my apartment because I did not want a permanent AC
+                setup. The current discount made it worth trying."
+              </p>
+              <div class="comment-footer">
+                <span class="comment-verified">✅ Verified buyer</span>
+                <span class="comment-time">· yesterday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="normalsection">
+      <!-- ============================ FINAL VERDICT & OFFER ============================ -->
+      <div class="section-container">
+        <div class="verdict-wrapper">
+          <!-- Left: Verdict -->
+          <div class="verdict-card">
+            <div class="verdict-badge">⚖️ FINAL SCORECARD</div>
+
+            <div class="verdict-content">
+              <div class="verdict-stamp">
+                <span class="verdict-icon">🏆</span>
+                <span class="verdict-label">STRONG RECOMMENDATION</span>
+              </div>
+
+              <p class="verdict-text">
+                Portable, easy to use, and energy-saving. Perfect for renters and one-room cooling.
+              </p>
+
+              <div class="verdict-rating">
+                <div class="verdict-stars">★★★★★</div>
+                <div class="verdict-meta">
+                  <span class="verdict-score">4.8</span>
+                  <span class="verdict-slash">/</span>
+                  <span class="verdict-max">5.0</span>
+                  <span class="verdict-count">(1,200+ reviews)</span>
+                </div>
+              </div>
+
+              <hr class="verdict-divider">
+
+              <div class="verdict-features">
+                <div class="verdict-feature">
+                  <span class="vf-icon">✓</span>
+                  <span class="vf-text">Portable & lightweight</span>
+                </div>
+                <div class="verdict-feature">
+                  <span class="vf-icon">✓</span>
+                  <span class="vf-text">No installation needed</span>
+                </div>
+                <div class="verdict-feature">
+                  <span class="vf-icon">✓</span>
+                  <span class="vf-text">Energy-saving spot cooling</span>
+                </div>
+                <div class="verdict-feature">
+                  <span class="vf-icon">✓</span>
+                  <span class="vf-text">Renter & dorm friendly</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Offer -->
+          <div class="offer-card">
+            <div class="offer-badge">💰 TODAY'S BEST PRICE</div>
+
+            <div class="offer-content">
+              <div class="offer-pricing">
+                <div class="offer-price-row">
+                  <span class="offer-label">Retail Price</span>
+                  <span class="offer-amount was">$275.98</span>
+                </div>
+                <div class="offer-price-row highlight">
+                  <span class="offer-label">Today's Price</span>
+                  <span class="offer-amount now">$137.99</span>
+                </div>
+              </div>
+
+              <div class="offer-save">
+                <span class="offer-save-icon">◆</span>
+                <span class="offer-save-text">Save 50% Today</span>
+              </div>
+
+              <a href="#" class="offer-cta"
+                onclick="event.preventDefault(); document.querySelector('.quiz-container').scrollIntoView({behavior:'smooth',block:'start'}); renderQuiz(0); return false;">
+                Claim This Offer →
+              </a>
+
+              <div class="offer-guarantees">
+                <span class="offer-guarantee">Free Shipping</span>
+                <span class="offer-guarantee-dot">•</span>
+                <span class="offer-guarantee">30-Day Guarantee</span>
+                <span class="offer-guarantee-dot">•</span>
+                <span class="offer-guarantee">Official Store</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disclosure -->
+        <div class="verdict-disclosure">
+          <span class="disclosure-icon">†</span>
+          Affiliate disclosure: we may earn a commission if you buy through this link.
+        </div>
+      </div>
+    </div>
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-links">
+          <a href="#" class="footer-link">Terms</a>
+          <span class="footer-divider">|</span>
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <span class="footer-divider">|</span>
+          <a href="#" class="footer-link">Contact</a>
+        </div>
+
+        <div class="footer-disclosure">
+          <span class="disclosure-label">Advertising Disclosure:</span>
+          <span class="disclosure-text">This site is an independent review and comparison resource. We may receive
+            compensation when you click links to products featured on this page. Product pricing, shipping, discounts,
+            and availability are controlled by the retailer and may change.</span>
+        </div>
+
+        <div class="footer-copyright">
+          <span class="copyright-text">© 2026 mustgraboffers.com.</span>
+          <span class="copyright-note">Results may vary by room size, climate, and usage.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
