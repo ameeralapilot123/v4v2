@@ -83,6 +83,7 @@ h3 {
   margin: 20px 0;
   display: flex;
   justify-content: center;
+  overflow: visible;
 }
 
 .note-left {
@@ -113,6 +114,9 @@ h3 {
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
 }
 
 .discount-badge {
@@ -126,14 +130,65 @@ h3 {
 }
 
 .availability-tag {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
   background: var(--dark-color);
   color: var(--primary-color);
-  padding: 5px 14px;
+  padding: 10px 22px;
   border-radius: 30px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  box-shadow: 0 4px 10px rgba(27, 38, 59, 0.2);
+}
+
+.availability-tag a {
+  display: inline-block;
+}
+
+.availability-tag.availability-attention {
+  animation: availability-attention-glow 2.5s ease-in-out 4;
+  animation-fill-mode: forwards;
+}
+
+.availability-tag.availability-attention::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 33px;
+  z-index: -1;
+  pointer-events: none;
+  animation: availability-halo 2.5s ease-in-out 4;
+  animation-fill-mode: forwards;
+}
+
+@keyframes availability-halo {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(119, 141, 169, 0);
+    opacity: 0;
+  }
+  50% {
+    box-shadow:
+      0 0 12px 4px rgba(119, 141, 169, 0.45),
+      0 0 20px 7px rgba(65, 90, 119, 0.2);
+    opacity: 1;
+  }
+}
+
+@keyframes availability-attention-glow {
+  0%,
+  100% {
+    box-shadow: 0 4px 10px rgba(27, 38, 59, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 10px 3px rgba(119, 141, 169, 0.5),
+      0 0 16px 5px rgba(65, 90, 119, 0.22),
+      0 4px 10px rgba(27, 38, 59, 0.2);
+  }
 }
 
 .features-list {

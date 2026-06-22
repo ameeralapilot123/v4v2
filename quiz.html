@@ -14,18 +14,29 @@
       role="region"
       aria-label="EpiCooler room match quiz"
     >
-      <button class="qback" onclick="closeQuizModal()" aria-label="Back">
-        Home
-      </button>
       <div class="quiz-shell">
+        <nav class="quiz-nav" aria-label="Quiz navigation">
+          <button
+            class="qnav-btn"
+            type="button"
+            onclick="closeQuizModal()"
+            aria-label="Back to home"
+          >
+            ← Home
+          </button>
+          <button
+            class="qnav-btn qnav-prev"
+            id="qPrevBtn"
+            type="button"
+            onclick="qPrev()"
+            aria-label="Previous question"
+          >
+            ← Previous Question
+          </button>
+        </nav>
         <div class="quiz-top">
           <div class="qlogo">EpiCooler Room Match</div>
           <div class="qtag">Find the right cooling setup for your space</div>
-          <div class="prevbut-holder">
-            <button class="qprev" onclick="qPrev()" aria-label="Previous">
-              ← Previous Question
-            </button>
-          </div>
         </div>
 
         <div class="qprogress-track">
@@ -543,6 +554,12 @@
             : "Step " + shown + " of " + visibleTotal;
         if (i === RESULT_DOM_INDEX) {
           qRenderResults();
+        }
+        const prevBtn = document.getElementById("qPrevBtn");
+        if (prevBtn) {
+          const hidePrev =
+            i === 0 || i === LOADER_INDEX || i === RESULT_DOM_INDEX;
+          prevBtn.hidden = hidePrev;
         }
         window.scrollTo(0, 0);
       }
