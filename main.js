@@ -99,6 +99,7 @@ function initSwipeMinimal() {
     function onMouseDown(e) {
         isDraggingMin = true;
         isAutoPlaying = false;
+        clearTimeout(restartTimeout);
         swipeStartXMin = e.clientX;
         swipeCurrentXMin = swipeMinProgress;
         document.addEventListener('mousemove', onMouseMove);
@@ -123,6 +124,7 @@ function initSwipeMinimal() {
         const touch = e.touches[0];
         isDraggingMin = true;
         isAutoPlaying = false;
+        clearTimeout(restartTimeout);
         swipeStartXMin = touch.clientX;
         swipeCurrentXMin = swipeMinProgress;
         document.addEventListener('touchmove', onTouchMove, { passive: false });
@@ -156,49 +158,101 @@ function initSwipeMinimal() {
     handle.addEventListener('mousedown', onMouseDown);
     handle.addEventListener('touchstart', onTouchStart);
     
-    // Auto-play on load
+    // Auto-play when section scrolls into view, then loop every 3s
+    let hasStartedFromView = false;
+    let restartTimeout = null;
+
+    function resetSwipeDemo() {
+        currentStep = -1;
+        swipeMinProgress = 0;
+
+        divider.style.transition = 'none';
+        progressBar.style.transition = 'none';
+        divider.style.left = '0px';
+        progressBar.style.width = '0%';
+
+        if (step1) step1.classList.remove('active');
+        if (step2) step2.classList.remove('active');
+        if (popup) popup.classList.remove('show');
+        clearTimeout(popupTimeout);
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                divider.style.transition = '';
+                progressBar.style.transition = '';
+            });
+        });
+    }
+
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
     function startAutoPlay() {
-        if (isAutoPlaying) return;
+        if (isAutoPlaying || isDraggingMin) return;
         isAutoPlaying = true;
-        let progress = swipeMinProgress;
-        const step = 1.2;
-        
-        function autoAdvance() {
+        resetSwipeDemo();
+
+        const duration = 2200;
+        let startTime = null;
+
+        function autoAdvance(now) {
             if (!isAutoPlaying || isDraggingMin) {
                 isAutoPlaying = false;
                 return;
             }
-            progress += step;
-            if (progress >= 100) {
-                progress = 100;
-                updateSwipe(progress);
+
+            if (startTime === null) startTime = now;
+            const t = Math.min((now - startTime) / duration, 1);
+            const progress = easeInOutCubic(t) * 100;
+
+            updateSwipe(progress);
+
+            if (t >= 1) {
                 isAutoPlaying = false;
-                // Reset after delay
-                setTimeout(() => {
-                    if (!isDraggingMin) {
-                        progress = 0;
-                        updateSwipe(0);
-                        setTimeout(startAutoPlay, 1500);
-                    }
-                }, 2500);
+                clearTimeout(restartTimeout);
+                restartTimeout = setTimeout(() => {
+                    if (!isDraggingMin) startAutoPlay();
+                }, 3000);
                 return;
             }
-            updateSwipe(progress);
+
             requestAnimationFrame(autoAdvance);
         }
-        
-        requestAnimationFrame(autoAdvance);
+
+        requestAnimationFrame(() => {
+            updateSwipe(0);
+            requestAnimationFrame(autoAdvance);
+        });
     }
-    
-    setTimeout(startAutoPlay, 600);
-    
+
+    const demoSection = document.querySelector('.swipe-demo-minimal');
+    if (demoSection) {
+        const viewObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (
+                        entry.isIntersecting &&
+                        !hasStartedFromView &&
+                        !isDraggingMin
+                    ) {
+                        hasStartedFromView = true;
+                        startAutoPlay();
+                    }
+                });
+            },
+            { threshold: 0.35 }
+        );
+        viewObserver.observe(demoSection);
+    }
+
     // Double click to reset
-    container.addEventListener('dblclick', function() {
+    container.addEventListener('dblclick', function () {
         isAutoPlaying = false;
-        updateSwipe(0);
-        setTimeout(startAutoPlay, 1000);
+        clearTimeout(restartTimeout);
+        resetSwipeDemo();
+        setTimeout(startAutoPlay, 3000);
     });
-    
     // Handle resize
     let resizeTimeout = null;
     window.addEventListener('resize', function() {

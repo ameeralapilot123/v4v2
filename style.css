@@ -193,16 +193,22 @@ h3 {
 
 .features-list {
   display: flex;
-  gap: 20px;
+  flex-wrap: nowrap;
+  gap: clamp(6px, 2vw, 20px);
   margin-top: 15px;
   justify-content: center;
+  width: 100%;
 }
 .feature-item {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
   background: var(--dark-color);
   color: var(--primary-color);
-  padding: 8px 16px;
+  padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2.5vw, 16px);
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: clamp(0.68rem, 2.6vw, 0.85rem);
   font-weight: 500;
 }
 
