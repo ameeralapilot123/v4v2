@@ -136,7 +136,6 @@ h3 {
   background: var(--dark-color);
   color: var(--primary-color);
   padding: 10px 22px;
-  border-radius: 30px;
   font-size: 0.95rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -207,7 +206,7 @@ h3 {
   background: var(--dark-color);
   color: var(--primary-color);
   padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2.5vw, 16px);
-  border-radius: 20px;
+  border-radius: 4px;
   font-size: clamp(0.68rem, 2.6vw, 0.85rem);
   font-weight: 500;
 }
@@ -215,7 +214,6 @@ h3 {
 /* Timer Styles */
 .timer-wrapper {
   background: var(--dark-color);
-  border-radius: 10px;
   padding: 12px 20px;
   min-width: 140px;
   text-align: center;
@@ -429,7 +427,7 @@ h3 {
   padding: 5px 10px;
   background-color: var(--secondary-color);
   color: var(--primary-color);
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 14px;
   margin-bottom: 10px;
 }
@@ -1426,7 +1424,6 @@ justify-content: center;
 
 .article-content {
   background: linear-gradient(135deg, var(--background-color), #f0f5f8);
-  border-radius: 16px;
   padding: 40px;
   border: 2px solid var(--primary-color);
   border-left: 6px solid var(--secondary-color);
@@ -1518,7 +1515,6 @@ justify-content: center;
 
 .like-rating-bar {
   background: var(--background-color);
-  border-radius: 12px;
   padding: 16px 18px 14px;
   border: 2px solid var(--primary-color);
   transition: all 0.3s ease;
@@ -1632,7 +1628,6 @@ justify-content: center;
 .like-pros,
 .like-cons {
   background: var(--background-color);
-  border-radius: 14px;
   padding: 20px 22px;
   border: 2px solid var(--primary-color);
   transition: all 0.3s ease;
@@ -1696,7 +1691,6 @@ justify-content: center;
   color: var(--font-color);
   padding: 18px 22px;
   background: var(--background-color);
-  border-radius: 12px;
   border: 1px solid var(--primary-color);
   margin-bottom: 20px;
 }
@@ -1884,7 +1878,6 @@ justify-content: center;
 /* ============================ BUYER COMMENTS ============================ */
 .comments-wrapper {
   background: var(--background-color);
-  border-radius: 16px;
   padding: 28px 24px 32px;
   border: 2px solid var(--primary-color);
   margin: 30px 0;
